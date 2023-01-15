@@ -14,9 +14,7 @@ commute to work each day.
 and initiatives to promote the bike-share program. These may include email, social media, and other channels.
 
 **Cyclistic marketing analytics team:** A team of data analysts who are responsible for collecting, analyzing, and
-reporting data that helps guide Cyclistic marketing strategy. You joined this team six months ago and have been busy
-learning about Cyclistic’s mission and business goals — as well as how you, as a junior data analyst, can help Cyclistic
-achieve them.
+reporting data that helps guide Cyclistic marketing strategy.
 
 **Cyclistic executive team:** The notoriously detail-oriented executive team will decide whether to approve the
 recommended marketing program.
@@ -48,7 +46,13 @@ To answer this question, we'll follow the 6 step process to produce deliverables
 
 ## Ask
 
-Consider the problem to solve, key stakeholders in the project, and identify the business task to accomplish.
+Consider the problem to solve and key stakeholders in the project, and identify the business task to accomplish.
 
 **Business task:** Analyze bike-share data, collected by Cyclistic during 2022, to discover insights to help lead the marketing push to convert casual riders to annual members.
+
+## Prepare
+
+Gather and properly store data to analyze, and identify how it's organized.
+
+**Data source:** Data was collected internally and stored as 12 separate CSV files, which were compressed to zip and hosted by AWS. Data was downloaded locally from AWS and extracted into a single folder with the following naming convention: "Original_Company_mm-dd-yy". CSV files were then standardized as: "yyyymm-divvy-tripdata". Data was then copied into a separate folder with the following naming convention "Copy_Company_mm-dd-yy" and was assigned as the working directory for the project.
 
