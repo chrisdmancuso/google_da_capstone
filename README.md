@@ -56,3 +56,15 @@ Gather and properly store data to analyze, and identify how it's organized.
 
 **Data source:** Data was collected internally and stored as 12 separate CSV files, which were compressed to zip and hosted by AWS. Data was downloaded locally from AWS and extracted into a single folder with the following naming convention: "Original_Company_mm-dd-yy". CSV files were then standardized as: "yyyymm-divvy-tripdata". Data was then copied into a separate folder with the following naming convention "Copy_Company_mm-dd-yy" and was assigned as the working directory for the project.
 
+![image](https://user-images.githubusercontent.com/31321037/212554423-f518edc0-84d5-43aa-8e1e-a8c2e9e497fa.png)
+
+![image](https://user-images.githubusercontent.com/31321037/212554615-81db420d-0d89-45b9-a292-363620212cb4.png)
+
+![image](https://user-images.githubusercontent.com/31321037/212554687-1b021e20-2c5a-4181-aa9b-9b1d42e1e1af.png)
+
+## Process
+
+Documentation of cleaning and manipulation of data.
+
+**Cleaning:** TODO
+
