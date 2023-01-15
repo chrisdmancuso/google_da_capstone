@@ -55,8 +55,9 @@ Consider the problem to solve and key stakeholders in the project, and identify 
 Gather and properly store data to analyze, and identify how it's organized.
 
 **Data source:** Data was collected internally and stored as 12 separate CSV files, which were compressed to zip and hosted by AWS. Data was downloaded locally from AWS and extracted into a single folder with the following naming convention: "Original_Company_mm-dd-yy". CSV files were then standardized as: "yyyymm-divvy-tripdata". Data was then copied into a separate folder with the following naming convention "Copy_Company_mm-dd-yy" and was assigned as the working directory for the project.
+A folder was then created with the following naming convention "Cleaned_Company_mm-dd-yy" to later store cleaned data.
 
-![image](https://user-images.githubusercontent.com/31321037/212554423-f518edc0-84d5-43aa-8e1e-a8c2e9e497fa.png)
+![image](https://user-images.githubusercontent.com/31321037/212562057-60d83ae9-fe80-49e6-9d78-8697da91c8f0.png)
 
 ![image](https://user-images.githubusercontent.com/31321037/212554615-81db420d-0d89-45b9-a292-363620212cb4.png)
 
@@ -66,5 +67,5 @@ Gather and properly store data to analyze, and identify how it's organized.
 
 Documentation of cleaning and manipulation of data.
 
-**Cleaning:** TODO
+[Refer to the external documentation file to follow along with the cleaning and data manipulation process.](https://github.com/chrisdmancuso/google_da_capstone/blob/main/documentation.md)
 
