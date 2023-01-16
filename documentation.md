@@ -159,5 +159,3 @@ END
 
 With these steps complete, we can begin our analysis.
 
-## Analysis
-TODO
