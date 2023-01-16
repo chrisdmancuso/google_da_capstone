@@ -13,7 +13,7 @@ Google Sheets, BigQuery, Python
 **2) Perform basic formatting and cleaning**
 ---
   - Resize header cells
-  - Use conditonal formatting to check for empty cells. 
+  - Use conditional  formatting to check for empty cells. 
     - Specifically, to accomplish our business task, we need to ensure that the columns concerning ride times and
   rider membership are not null.
   - Use filters on columns with binary data to ensure the integrity of the data. 
@@ -51,7 +51,7 @@ Before uploading to BigQuery, we need to create a new project and dataset.
 
 We are now ready to begin importing our CSVs into BigQuery
 
-1) Select the 3 dot option menu next to our dataset and select create table.
+1) Select the 3 dot option menu next to our dataset and select 'Create Table.'
 
 ![image](https://user-images.githubusercontent.com/31321037/212567139-bfe9bd56-13bf-4b61-8ae8-265b6f3f2264.png)
 
@@ -131,6 +131,33 @@ SELECT COUNT(*) FROM `cyclistic_2022.trips_all`
 ```
 - We should have 5,667,717 results
 
+Before we start our analysis, we'll perform two more data manipulations to complete our data.
+
+1) While exploring the data, it was discovered that 531 entries had trip end times before start times, or end times equal to start times. We'll remove these entries from our dataset. 
+```
+DELETE FROM capstone-bikes-374620.cyclistic_2022.trips_all
+WHERE ended_at < started_at OR ended_at = started_at
+```
+
+2) We'll utilize a temp table to insert the day of the week a trip was taken (as an int), as well as the duration of each trip into our main table. We'll also cut down on some of the superfluous columns
+```
+BEGIN
+CREATE TEMP TABLE duration (trip_id STRING, trip_duration INTERVAL, day_of_week INTEGER);
+
+INSERT INTO duration SELECT ride_id, ended_at - started_at, EXTRACT(DAYOFWEEK FROM started_at)
+FROM `capstone-bikes-374620.cyclistic_2022.trips_all`;
+
+SELECT ride_id, rideable_type, started_at, ended_at, trip_duration, day_of_week, member_casual
+FROM `capstone-bikes-374620.cyclistic_2022.trips_all`
+INNER JOIN duration 
+ON `capstone-bikes-374620.cyclistic_2022.trips_all`.ride_id = duration.trip_id;
+END
+```
+3) Finally, we'll export the results to our Google Drive as CSV using BigQuery
+
+![image](https://user-images.githubusercontent.com/31321037/212592682-39a5d01f-09f1-4a74-aa17-9dd9a9a1e85b.png)
+
 With these steps complete, we can begin our analysis.
 
 ## Analysis
+TODO
