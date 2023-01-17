@@ -173,3 +173,26 @@ ORDER BY trip_duration ASC;
 
 With these steps complete, we can begin our analysis.
 
+**NOTE:** During the analysis, it was determined that station id's and latitude and longitude coordinates could be necessary for data visualizations. The following queries will include those points, in addition to the above.
+```
+SELECT 
+  `capstone-bikes-374620.cyclistic_2022.trips_trunc`.ride_id, 
+  `capstone-bikes-374620.cyclistic_2022.trips_trunc`.rideable_type,
+  day_of_week, 
+  membership, 
+  TIME(EXTRACT(HOUR FROM trip_duration), EXTRACT(MINUTE FROM trip_duration), EXTRACT(SECOND FROM trip_duration)) AS trip_duration,
+  start_station_id, 
+  start_station_name, 
+  end_station_id, 
+  end_station_name, 
+  start_lat,
+  start_lng,
+  end_lat,
+  end_lng
+FROM `capstone-bikes-374620.cyclistic_2022.trips_all` 
+LEFT JOIN `capstone-bikes-374620.cyclistic_2022.trips_trunc`
+ON `capstone-bikes-374620.cyclistic_2022.trips_all`.ride_id = `capstone-bikes-374620.cyclistic_2022.trips_trunc`.ride_id
+WHERE (start_station_id IS NOT NULL OR start_station_name IS NOT NULL) AND (end_station_id IS NOT NULL OR end_station_name IS NOT NULL) 
+  AND EXTRACT(HOUR FROM trip_duration) < 24
+  AND TIME(EXTRACT(HOUR FROM trip_duration), EXTRACT(MINUTE FROM trip_duration), EXTRACT(SECOND FROM trip_duration)) BETWEEN '00:02:00' AND '09:00:00'
+```
