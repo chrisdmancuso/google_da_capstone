@@ -131,7 +131,7 @@ SELECT COUNT(*) FROM `cyclistic_2022.trips_all`
 ```
 - We should have 5,667,717 results
 
-Before we start our analysis, we'll perform two more data manipulations to complete our data.
+Before we start our analysis, we'll perform three more data manipulations to complete our data.
 
 1) While exploring the data, it was discovered that 531 entries had trip end times before start times, or end times equal to start times. We'll remove these entries from our dataset. 
 ```
@@ -139,23 +139,37 @@ DELETE FROM capstone-bikes-374620.cyclistic_2022.trips_all
 WHERE ended_at < started_at OR ended_at = started_at
 ```
 
-2) We'll utilize a temp table to insert the day of the week a trip was taken (as an int), as well as the duration of each trip into our main table. We'll also cut down on some of the superfluous columns
+2) After exploring the data, it was discovered that a significant amount of entries exist where the trip duration falls significantly outside the normal expected values, from trip durations of 1 second to 600 plus hours. After consulting with management, the decision was made to ignore results under 2 minutes, and results over 9 hours. The following queries will create a new table with the adjusted data and return a more condensed view
 ```
-BEGIN
-CREATE TEMP TABLE duration (trip_id STRING, trip_duration INTERVAL, day_of_week INTEGER);
-
-INSERT INTO duration SELECT ride_id, ended_at - started_at, EXTRACT(DAYOFWEEK FROM started_at)
+CREATE TABLE `capstone-bikes-374620.cyclistic_2022`.trips_trunc(ride_id STRING, rideable_type STRING, 
+  started_at TIMESTAMP, ended_at TIMESTAMP, trip_duration INTERVAL, day_of_week INTEGER, membership STRING);
+INSERT INTO `capstone-bikes-374620.cyclistic_2022.trips_trunc` 
+SELECT 
+  ride_id, 
+  rideable_type, 
+  started_at,
+  ended_at, 
+  ended_at - started_at, 
+  EXTRACT(DAYOFWEEK FROM started_at), 
+  member_casual 
 FROM `capstone-bikes-374620.cyclistic_2022.trips_all`;
+SELECT 
+  ride_id,
+  rideable_type,
+  membership,
+  TIME(EXTRACT(HOUR FROM trip_duration), EXTRACT(MINUTE FROM trip_duration), EXTRACT(SECOND FROM trip_duration)) AS trip_duration,
+  started_at,
+  ended_at,
+  day_of_week,
+  
+FROM `capstone-bikes-374620.cyclistic_2022.trips_trunc`
+WHERE EXTRACT(HOUR FROM trip_duration) <= 9 AND CAST(trip_duration AS STRING) > '0-0 0 0:2:0'
+ORDER BY trip_duration ASC;
 
-SELECT ride_id, rideable_type, started_at, ended_at, trip_duration, day_of_week, member_casual
-FROM `capstone-bikes-374620.cyclistic_2022.trips_all`
-INNER JOIN duration 
-ON `capstone-bikes-374620.cyclistic_2022.trips_all`.ride_id = duration.trip_id;
-END
 ```
 3) Finally, we'll export the results to our Google Drive as CSV using BigQuery
 
-![image](https://user-images.githubusercontent.com/31321037/212592682-39a5d01f-09f1-4a74-aa17-9dd9a9a1e85b.png)
+![image](https://user-images.githubusercontent.com/31321037/212783967-af7ea1d6-a02e-4912-bc08-627b8291022f.png)
 
 With these steps complete, we can begin our analysis.
 
