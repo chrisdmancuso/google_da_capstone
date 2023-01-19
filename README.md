@@ -69,3 +69,8 @@ Documentation of cleaning and manipulation of data.
 
 [Refer to the external documentation file to follow along with the cleaning and data manipulation process.](https://github.com/chrisdmancuso/google_da_capstone/blob/main/documentation.md)
 
+## Analysis
+
+Documentation of analysis
+
+[Refer to the external documentation file to view the analysis.](https://github.com/chrisdmancuso/google_da_capstone/blob/main/analysis.md)
