@@ -74,3 +74,11 @@ Documentation of cleaning and manipulation of data.
 Documentation of analysis
 
 [Refer to the external documentation file to view the analysis.](https://github.com/chrisdmancuso/google_da_capstone/blob/main/analysis.md)
+
+## Share/Act
+
+Completed presentations of the analysis
+
+**PDF:** [Click here to view the pdf](https://github.com/chrisdmancuso/google_da_capstone/blob/main/Cyclistic%20Riders%20Tendencies_%20Member%20vs%20Casual.pdf)
+
+**Powerpoint:** [Click here to download the powerpoint](https://github.com/chrisdmancuso/google_da_capstone/blob/main/Cyclistic%20Riders%20Tendencies_%20Member%20vs%20Casual.pptx)
